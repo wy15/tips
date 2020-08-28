@@ -35,7 +35,7 @@ func main() {
     ...
 }
 
---server
+// server
 func main() {
     certificate, err := tls.LoadX509KeyPair("server.crt", "server.key")
     if err != nil {
@@ -64,7 +64,7 @@ func main() {
 ## token
 
 ```go
---client
+// client
 type Authentication struct {
     Token string
 }
@@ -91,7 +91,7 @@ func main() {
 
     ...
 }
---server
+// server
 type Authentication struct {
     Token string
 }
