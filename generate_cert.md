@@ -12,6 +12,7 @@ $ openssl req -new -x509 -days 3650 \
 ## server
 
 ```bash
+$ openssl genrsa -out server.key 2048
 $ openssl req -new \
     -subj "/C=GB/L=China/O=server/CN=server.io" \
     -key server.key \
@@ -25,6 +26,7 @@ $ openssl x509 -req -sha256 \
 ## client
 
 ```bash
+$ openssl genrsa -out client.key 2048
 $ openssl req -new \
     -subj "/C=GB/L=China/O=client/CN=client.io" \
     -key client.key \
