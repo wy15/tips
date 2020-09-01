@@ -3,6 +3,8 @@
 ## tls
 
 ```go
+// client
+// with auth
 func main() {
     certificate, err := tls.LoadX509KeyPair("client.crt", "client.key")
     if err != nil {
@@ -34,8 +36,42 @@ func main() {
 
     ...
 }
+// without auth
+func main() {
+    creds, err := credentials.NewClientTLSFromFile(
+        "rootCA.pem", "",
+    )
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    conn, err := grpc.Dial("localhost:5000",
+        grpc.WithTransportCredentials(creds),
+    )
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer conn.Close()
+
+    ...
+}
 
 // server
+
+// no client auth
+func main() {
+    creds, err := credentials.NewServerTLSFromFile("server.crt", "server.key")
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    server := grpc.NewServer(grpc.Creds(creds))
+
+    ...
+}
+
+
+// with client auth
 func main() {
     certificate, err := tls.LoadX509KeyPair("server.crt", "server.key")
     if err != nil {
