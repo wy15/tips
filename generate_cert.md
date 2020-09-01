@@ -11,6 +11,8 @@ $ mkcert $(mkcert -CAROOT)/rootCA.pem
 $ mkcert server.io
 // client
 $ mkcert -client client.io
+```
+
 ## CA root
 
 ```bash
